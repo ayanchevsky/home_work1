@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список файлов в каталоге</title>
+</head>
+<body>
+    <h1>Список файлов в каталоге</h1>
+    <div class="row">
+        <div class="col-md">
+            {% for object in listdir %}
+                <p>{{object}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="{% url 'home' %}"><button>Главная страница</button></a>
+</body>
+</html>
