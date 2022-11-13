@@ -1,3 +1,5 @@
+import copy
+
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +30,18 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def recipes(request, recept):
+    count = request.GET.get("servings", 1)
+    template_name = 'calculator/index.html'
+    recipe = copy.deepcopy(DATA.get(recept, None))
+    if recipe:
+        for i in recipe.keys():
+            new_ingredient = recipe[i] * float(count)
+            recipe[i] = int(new_ingredient) if float(new_ingredient).is_integer() else "%.2f" % new_ingredient
+
+    context = {
+        'recipe': recipe
+    }
+    return render(request, template_name, context)
